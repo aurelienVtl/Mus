@@ -11,9 +11,9 @@ public class JeuDeMus {
     System.out.print("Entrez votre nom: ");
     var nomJoueur = new Scanner(System.in).next();
     var joueurHumain = Joueur.humain(nomJoueur);
-
+    Joueur joueurs[] ={joueurHumain, Joueur.ordinateur()};
     var partie = new Partie(new AffichageEvenements(joueurHumain));
-    var resultat = partie.jouer(new Opposants(joueurHumain, Joueur.ordinateur()));
+    var resultat = partie.jouer(new Opposants(joueurs));
 
     System.out.println("Le vainqueur de la partie est " + resultat.vainqueur().nom());
   }

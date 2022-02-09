@@ -8,12 +8,13 @@ public class Joueur {
   public static Joueur humain(String nom) {
     return new Joueur(nom, new InterfaceJoueurHumain());
   }
-
+  public Equipe equipe;
   public static Joueur ordinateur() {
     return new Joueur("Ordinateur", new InterfaceJoueurOrdinateur());
   }
 
   private final String nom;
+
   public final InterfaceJoueur interfaceJoueur;
   private final Main main = Main.vide();
 
@@ -33,5 +34,9 @@ public class Joueur {
   public void donnerCartes(List<Carte> cartes) {
     main.ajouter(cartes);
     interfaceJoueur.nouvelleMain(main);
+  }
+
+  public void setEquipe(Equipe equipe){
+    this.equipe = equipe;
   }
 }

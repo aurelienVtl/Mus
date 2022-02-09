@@ -5,18 +5,25 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Opposants {
-  private Joueur joueurEsku;
+  private Joueur[] ordreDePassage;
   private Joueur joueurZaku;
+  private Joueur joueurEsku;
 
-  public Opposants(Joueur joueurEsku, Joueur joueurZaku) {
-    this.joueurEsku = joueurEsku;
-    this.joueurZaku = joueurZaku;
+  public Opposants(Joueur[] joueurs) {
+    this.ordreDePassage=joueurs;
+    this.joueurEsku = joueurs[0];
+    this.joueurZaku = joueurs[3];
   }
 
   public void tourner() {
-    var tmp = joueurEsku;
-    joueurEsku = joueurZaku;
-    joueurZaku = tmp;
+    Joueur[] copieOdreDePassage;
+    copieOdreDePassage =ordreDePassage;
+    for(int i=1; i< ordreDePassage.length;i++) {
+      ordreDePassage[i+1 % ordreDePassage.length] = copieOdreDePassage[i];
+    }
+    this.joueurEsku = ordreDePassage[0];
+    this.joueurZaku = ordreDePassage[ordreDePassage.length -1];
+
   }
 
   public Joueur joueurEsku() {
@@ -28,6 +35,6 @@ public class Opposants {
   }
 
   public List<Joueur> dansLOrdre() {
-    return List.of(joueurEsku, joueurZaku);
+    return List.of(ordreDePassage);
   }
 }
